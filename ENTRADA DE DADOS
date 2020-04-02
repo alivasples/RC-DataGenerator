@@ -1,0 +1,48 @@
+
+//*http://en.cppreference.com/w/cpp/numeric/random
+
+===========================================================
+1ª Parte
+===========================================================
+
+1.  Tamanho T2
+2.  Tamanho T1
+3.  Correlação
+4.  Quantidade de Grupos
+5.  Overlap Grupos
+6.  Distribuição Grupos que compartilharão tuplas
+7.  Distribuição Grupos que receberão as tuplas
+8.  Distribuição inicial das tuplas/grupos
+
+===========================================================
+2ª Parte
+===========================================================
+
+1.  Tamanho L1 e L2
+    a) nro.  atributos
+    b) nome, tipos e distribuição dos atributos
+    c) funcoes de distancia e threshold de similaridade
+
+2.  Tamanho !L1
+    a) nro. de atributos
+    b) nome e tipos dos atributos
+
+===========================================================
+
+3           - size T2
+30          - size T1
+0.25        - correlation
+8           - number of groups
+0.5         - overlapping
+UNIFORM     - start groups distributions
+UNIFORM     - SHARING: from groups distribution
+UNIFORM     - SHARING: to groups distribution
+
+2           - number of attributes T2
+ATT1(float,2) EUCLIDIAN 0.1 UNIFORM 0 2
+ATT2(float,1) EUCLIDIAN 0.25 NORMAL 0 2
+
+1           - number of attributes T1
+ATT3(char,1)
+
+

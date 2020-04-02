@@ -1,0 +1,94 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/alivasples/PROJECTS/External/RC-DataGenerator/Alexis Code (DG for Relational Conditioner)/include/simple_file_parser/simple_file_parser.cc
+iostream
+-
+simple_file_parser.h
+/home/alivasples/PROJECTS/External/RC-DataGenerator/Alexis Code (DG for Relational Conditioner)/include/simple_file_parser/simple_file_parser.h
+
+/home/alivasples/PROJECTS/External/RC-DataGenerator/Alexis Code (DG for Relational Conditioner)/include/simple_file_parser/simple_file_parser.h
+vector
+-
+string
+-
+fstream
+-
+cstdlib
+-
+
+/home/alivasples/PROJECTS/External/RC-DataGenerator/Alexis Code (DG for Relational Conditioner)/main.cpp
+iostream
+-
+iterator
+-
+map
+-
+vector
+-
+fstream
+-
+cmath
+-
+algorithm
+-
+random
+-
+set
+-
+iomanip
+-
+src/Attribute.h
+/home/alivasples/PROJECTS/External/RC-DataGenerator/Alexis Code (DG for Relational Conditioner)/src/Attribute.h
+src/Row.h
+/home/alivasples/PROJECTS/External/RC-DataGenerator/Alexis Code (DG for Relational Conditioner)/src/Row.h
+include/simple_file_parser/simple_file_parser.h
+/home/alivasples/PROJECTS/External/RC-DataGenerator/Alexis Code (DG for Relational Conditioner)/include/simple_file_parser/simple_file_parser.h
+src/Utils.h
+/home/alivasples/PROJECTS/External/RC-DataGenerator/Alexis Code (DG for Relational Conditioner)/src/Utils.h
+queue
+-
+
+/home/alivasples/PROJECTS/External/RC-DataGenerator/Alexis Code (DG for Relational Conditioner)/src/Attribute.cpp
+Attribute.h
+/home/alivasples/PROJECTS/External/RC-DataGenerator/Alexis Code (DG for Relational Conditioner)/src/Attribute.h
+iostream
+-
+
+/home/alivasples/PROJECTS/External/RC-DataGenerator/Alexis Code (DG for Relational Conditioner)/src/Attribute.h
+map
+-
+vector
+-
+
+/home/alivasples/PROJECTS/External/RC-DataGenerator/Alexis Code (DG for Relational Conditioner)/src/Row.cpp
+Row.h
+/home/alivasples/PROJECTS/External/RC-DataGenerator/Alexis Code (DG for Relational Conditioner)/src/Row.h
+
+/home/alivasples/PROJECTS/External/RC-DataGenerator/Alexis Code (DG for Relational Conditioner)/src/Row.h
+vector
+-
+string
+-
+Attribute.h
+/home/alivasples/PROJECTS/External/RC-DataGenerator/Alexis Code (DG for Relational Conditioner)/src/Attribute.h
+
+/home/alivasples/PROJECTS/External/RC-DataGenerator/Alexis Code (DG for Relational Conditioner)/src/Utils.cpp
+Utils.h
+/home/alivasples/PROJECTS/External/RC-DataGenerator/Alexis Code (DG for Relational Conditioner)/src/Utils.h
+
+/home/alivasples/PROJECTS/External/RC-DataGenerator/Alexis Code (DG for Relational Conditioner)/src/Utils.h
+vector
+-
+math.h
+-
+string
+-
+set
+-
+
