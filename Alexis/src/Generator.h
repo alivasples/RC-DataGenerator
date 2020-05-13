@@ -32,9 +32,9 @@ class Generator{
         // ATTRIBUTES
         bool isDebugMode;
         simple_file_parser sfp; // Input parser
-        ofstream fContent; // Before called Dividend (File)
-        ofstream fRequisites; // Before called Divisor  (File)
-        ofstream fGroups;  // Groups where content tuples belong to (File)
+        ofstream fileT1; // Before called Dividend (File)
+        ofstream fileT2; // Before called Divisor  (File)
+        ofstream fileTG;  // Groups where content tuples belong to (File)
         int nrT1; // number of tuples of content table 
         int nrT2; // number of tuples of requisites table
         int nrGroups; // number of groups to divide the content table (T1)
@@ -290,21 +290,21 @@ string Generator::getRandomStringValue(DISTRIBUTION distribution, int size)
 // Constructor
 Generator::Generator(string inputFileName){
     //sfp.open(inputFileName.c_str());
-    fContent.open("T1.data");
-    fRequisites.open("T2.data");
-    fGroups.open("TG.data");
+    fileT1.open("T1.data");
+    fileT2.open("T2.data");
+    fileTG.open("TG.data");
     // 3 decimal precision for float values in T1 and T2
-    fContent << setprecision(3);
-    fRequisites << setprecision(3);
+    fileT1 << setprecision(3);
+    fileT2 << setprecision(3);
     // For random values
     srand(time(NULL));
 }
 
 // Destructor
 Generator::~Generator(){
-    fContent.close();
-    fRequisites.close();
-    fGroups.close();
+    fileT1.close();
+    fileT2.close();
+    fileTG.close();
 }
 
 // Getters and Setters
@@ -463,7 +463,7 @@ void Generator::saveFiles(){
     for(int idxTuple = 0; idxTuple < tuplesT1.size(); idxTuple++)
     {
         // Print the tuple id
-        fGroups << idxTuple << '\t';
+        fileTG << idxTuple << '\t';
         int groupCounter = 0;
 
         // Finding all the groups that current tuple belongs to
@@ -472,8 +472,8 @@ void Generator::saveFiles(){
             it = tGroups.at(idxGroup).find(idxTuple);
             if(it != tGroups.at(idxTuple).end())
             {
-                if(groupCounter > 0) fGroups << ",";
-                fGroups << idxGroup;
+                if(groupCounter > 0) fileTG << ",";
+                fileTG << idxGroup;
                 groupCounter++;
             }
         }
@@ -487,82 +487,83 @@ void Generator::saveFiles(){
                 set<int> outlierGroupSet;
                 outlierGroupSet.insert(idxTuple);
                 tGroups.push_back(outlierGroupSet);
-                fGroups << tGroups.size();
+                fileTG << tGroups.size();
             }
             // or, fit the row on a valid group (this operation doesn't affect the correlation factor)
             else
             {
-                int someValidGroup = tValidGroups.at(rand() % tValidGroups.size());
+                // int someValidGroup = tValidGroups.at(rand() % tValidGroups.size());
+                int someValidGroup = rand()%nrGroups;
                 tGroups.at(someValidGroup).insert(idxTuple);
-                fGroups << someValidGroup;
+                fileTG << someValidGroup;
             }
         }
 
-        fGroups << endl;
+        fileTG << endl;
     }
 
     // OUTPUT T1 
     for(Attribute& att : attsT1)
     {
-        fDividend << att.name << "(" << att.type << ","<< att.size <<");";
+        fileT1 << att.getName() << "(" << att.getType() << ","<< att.getSize() <<");";
     }
 
-    fDividend << endl;
+    fileT1 << endl;
 
-    for(auto row: t1)
+    for(auto row: tuplesT1)
     {
         for(int i=0; i < row.values.size(); i++)
         {
-            if(attCandidates.at(i).type.compare("float") == 0)
+            if(attsT1.at(i).getType() == "float")
             {
-                for(int j=0; j<row.values.at(i).fValues.size(); j++)
+                for(int j = 0; j < row.values.at(i).fValues.size(); j++)
                 {
                     if(j == row.values.at(i).fValues.size()-1)
-                        fDividend << row.values.at(i).fValues.at(j);
+                        fileT1 << row.values.at(i).fValues.at(j);
                     else
-                        fDividend << row.values.at(i).fValues.at(j) << ",";
+                        fileT1 << row.values.at(i).fValues.at(j) << ",";
                 }
             }
             else
             {
-                fDividend << row.values.at(i).strValue;
+                fileT1 << row.values.at(i).strValue;
             }
 
 
-            fDividend << ";";
+            fileT1 << ";";
         }
-        fDividend << endl;
+        fileT1 << endl;
     }
 
     // OUTPUT T2 
     for(Attribute& att : attsT2)
     {
-        fDivisor << att.name << "(" << att.type << ","<< att.size <<");";
+        fileT2 << att.getName() << "(" << att.getType() << ","<< att.getSize() <<");";
     }
 
-    fDivisor << endl;
+    fileT2 << endl;
 
-    for(auto row: t2)
+    for(auto row: tuplesT2)
     {
         for(int i=0; i < row.values.size(); i++)
         {
-            if(attRequirements.at(i).type.compare("float") == 0)
+            if(attsT2.at(i).getType() == "float")
             {
                 for(int j=0; j<row.values.at(i).fValues.size(); j++)
                 {
                     if(j == row.values.at(i).fValues.size()-1)
-                        fDivisor << row.values.at(i).fValues.at(j);
+                        fileT2 << row.values.at(i).fValues.at(j);
                     else
-                        fDivisor << row.values.at(i).fValues.at(j) << ",";
+                        fileT2 << row.values.at(i).fValues.at(j) << ",";
                 }
             }
             else
             {
-                fDivisor << row.values.at(i).strValue;
+                fileT2 << row.values.at(i).strValue;
             }
-            fDivisor << ";";
+            fileT2 << ";";
         }
-        fDivisor << endl;
+        fileT2 << endl;
     }
 }
 
