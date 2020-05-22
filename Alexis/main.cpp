@@ -14,5 +14,6 @@ int main(int argc, char* argv[]){
     generator.populateT1();
     generator.populateT2();
     generator.saveFiles();
+    generator.closeFiles();
     return 0;
 }

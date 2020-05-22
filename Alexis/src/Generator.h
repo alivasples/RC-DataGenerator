@@ -56,8 +56,8 @@ class Generator{
         vector<Row> tuplesT2; // Collection of tupples values for every att of T2
         
         // METHODS
-        void parseReqsTableAttributes();
-        void parseContentTableAttributes();
+        void parseT1Attributes();
+        void parseT2Attributes();
         int getRandomGroup(DISTRIBUTION distribution);
         float getRandomFloatNumber(DISTRIBUTION distribution, float p1, float p2);
         string getRandomStringValue(DISTRIBUTION distribution, int size);
@@ -66,11 +66,10 @@ class Generator{
         // METHODS
         // Constructor
         Generator(string inputFileName);
-        // Destructor
-        ~Generator();
         // Getters and Setters
         void setDebugMode(bool isDebugMode);
         // Other methods
+        void closeFiles();
         void parseParameters();
         void distributeGroups();
         void populateT1();
@@ -84,7 +83,9 @@ class Generator{
 // ATT1(float, 2) EUCLIDIAN 0.25
 // UNIFORM 0 1
 // UNIFORM 0 1
-void Generator::parseContentTableAttributes(){
+void Generator::parseT1Attributes(){
+    // ___ Just loging a trace
+    DBG_MSG("Parsing T1 Attributes\n");
     // Vars definition
     string attName, attType;
     int attSize;
@@ -129,13 +130,17 @@ void Generator::parseContentTableAttributes(){
 
         attsT1.push_back(Attribute(attName, attType, attSize, attDistance, attThreshold, distributions, mean, dev));
     }
+    // ___ Just loging a trace
+    DBG_MSG("T1 Attributes Parsed\n");
 }
 
 // Reading T2 Attributes (too similar to T1 reader). EXAMPLE:
 // ATT1(float, 2) EUCLIDIAN 0.25
 // UNIFORM 0 1
 // UNIFORM 0 1
-void Generator::parseReqsTableAttributes(){
+void Generator::parseT2Attributes(){
+    // ___ Just loging a trace
+    DBG_MSG("Parsing T2 Attributes\n");
     // Vars definition
     string attName, attType;
     int attSize;
@@ -152,7 +157,7 @@ void Generator::parseReqsTableAttributes(){
         attSize = atoi(sfp.get_token(4).c_str()); // 2
         attDistance = DISTANCE(dictionary[sfp.get_token(6)]); // EUCLIDIAN
         attThreshold = atof(sfp.get_token(7).c_str()); // 0.25
-
+     
         vector<DISTRIBUTION> distributions; // (UNIFORM, UNIFORM)
         vector<float> mean; // (0,0)
         vector<float> dev; // (1,1)
@@ -180,6 +185,8 @@ void Generator::parseReqsTableAttributes(){
 
         attsT2.push_back(Attribute(attName, attType, attSize, attDistance, attThreshold, distributions, mean, dev));
     }
+    // ___ Just loging a trace
+    DBG_MSG("T2 Attributes Parsed\n");
 }
 
 // This function returns an index of group (distributed)
@@ -217,6 +224,7 @@ int Generator::getRandomGroup(DISTRIBUTION distribution)
 // This function will return a random float number
 float Generator::getRandomFloatNumber(DISTRIBUTION distribution, float p1, float p2)
 {
+    //return (double)(rand()%100) / 100.0;
     switch(distribution)
     {
         case DISTRIBUTION::NORMAL:
@@ -289,7 +297,7 @@ string Generator::getRandomStringValue(DISTRIBUTION distribution, int size)
 // PUBLIC METHODS
 // Constructor
 Generator::Generator(string inputFileName){
-    //sfp.open(inputFileName.c_str());
+    sfp.open(inputFileName.c_str());
     fileT1.open("T1.data");
     fileT2.open("T2.data");
     fileTG.open("TG.data");
@@ -298,13 +306,16 @@ Generator::Generator(string inputFileName){
     fileT2 << setprecision(3);
     // For random values
     srand(time(NULL));
+    random_device seed;
+    generator.seed(seed());
 }
 
-// Destructor
-Generator::~Generator(){
+// Closing files
+void Generator::closeFiles(){
     fileT1.close();
     fileT2.close();
     fileTG.close();
+    sfp.close();
 }
 
 // Getters and Setters
@@ -313,6 +324,8 @@ void Generator::setDebugMode(bool isDebugMode){ this->isDebugMode = isDebugMode;
 // OTHER PUBLIC METHODS
 // Read and parse input parameters
 void Generator::parseParameters(){
+    // ___ Just loging a trace
+    DBG_MSG("Parsing Parameters\n");
     // Tokens for separate input lines
     sfp.set_single_char_tokens(", ()");
     // Getting the number of tuples for table of requisites (T2)
@@ -348,16 +361,20 @@ void Generator::parseParameters(){
     toGroupsDist = (DISTRIBUTION)dictionary[sfp.get_token(0)];
     // Getting the number of requisites table (T2) attributes
     sfp.get_next_line();
-    nrT1Atts = sfp.get_token_int(0);
-    parseReqsTableAttributes();
+    nrT2Atts = sfp.get_token_int(0);
+    parseT2Attributes();
     // Getting the number of content table (T1) attributes
     sfp.get_next_line();
-    nrT2Atts = sfp.get_token_int(0);
-    parseContentTableAttributes();
+    nrT1Atts = sfp.get_token_int(0);
+    parseT1Attributes();
+    // ___ Just loging a trace
+    DBG_MSG("Parameters Parsed\n");
 }
 
 // Read and parse input parameters
 void Generator::distributeGroups(){
+    // ___ Just loging a trace
+    DBG_MSG("Distributing groups\n");
     // Fill all the groups with the first <nrGroups> Content Table tuples
     for(int i = 0; i < nrGroups; i++){
         set<int> tmp;
@@ -395,10 +412,14 @@ void Generator::distributeGroups(){
         // Insert the picked value 
         tGroups[toGrp].insert(*it);
     }
+    // ___ Just loging a trace
+    DBG_MSG("Groups distributed\n");
 }
 
 // Populate Content Table (T1)
 void Generator::populateT1(){
+    // ___ Just loging a trace
+    DBG_MSG("Populating T1\n");
     for(int i=0 ; i < nrT1; i++)
     {
         // Empty row of elements
@@ -423,11 +444,14 @@ void Generator::populateT1(){
         // Push the new tuple to the T1 tupples set
         tuplesT1.push_back(newRow);
     }
+    // ___ Just loging a trace
+    DBG_MSG("T1 Populated\n");
 }
 
 // Populate Requisites Table (T2)
 void Generator::populateT2(){
-
+    // ___ Just loging a trace
+    DBG_MSG("Populating T2\n");
     for(int i=0 ; i < nrT2; i++)
     {
         //tSatisfyRequirements.push_back(set<int>());
@@ -453,11 +477,17 @@ void Generator::populateT2(){
         // Push the new tuple to T2 tupples set
         tuplesT2.push_back(newRow);
     }
+    // ___ Just loging a trace
+    DBG_MSG("T2 Populated\n");
 }
 
 // Save data into the files
 void Generator::saveFiles(){
+    // ___ Just loging a trace
+    DBG_MSG("Saving Files\n");
     //OUTPUT GROUPS, e.g.
+    // ___ Just loging a trace
+    DBG_MSG("Saving TG\n");
     // row_id, group
     set<int>::iterator it;
     for(int idxTuple = 0; idxTuple < tuplesT1.size(); idxTuple++)
@@ -470,7 +500,7 @@ void Generator::saveFiles(){
         for(int idxGroup = 0; idxGroup < tGroups.size(); idxGroup++)
         {
             it = tGroups.at(idxGroup).find(idxTuple);
-            if(it != tGroups.at(idxTuple).end())
+            if(it != tGroups.at(idxGroup).end())
             {
                 if(groupCounter > 0) fileTG << ",";
                 fileTG << idxGroup;
@@ -501,8 +531,12 @@ void Generator::saveFiles(){
 
         fileTG << endl;
     }
+    // ___ Just loging a trace
+    DBG_MSG("TG Saved\n");
 
     // OUTPUT T1 
+    // ___ Just loging a trace
+    DBG_MSG("Saving T1\n");
     for(Attribute& att : attsT1)
     {
         fileT1 << att.getName() << "(" << att.getType() << ","<< att.getSize() <<");";
@@ -534,8 +568,12 @@ void Generator::saveFiles(){
         }
         fileT1 << endl;
     }
+    // ___ Just loging a trace
+    DBG_MSG("T1 Saved\n");
 
     // OUTPUT T2 
+    // ___ Just loging a trace
+    DBG_MSG("Saving T2\n");
     for(Attribute& att : attsT2)
     {
         fileT2 << att.getName() << "(" << att.getType() << ","<< att.getSize() <<");";
@@ -565,6 +603,8 @@ void Generator::saveFiles(){
         }
         fileT2 << endl;
     }
+    // ___ Just loging a trace
+    DBG_MSG("T2 Saved\nFiles saved\n");
 }
 
 #endif

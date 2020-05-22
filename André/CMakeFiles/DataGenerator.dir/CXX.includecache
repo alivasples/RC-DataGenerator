@@ -1,4 +1,4 @@
-#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
 
 #IncludeRegexScan: ^.*$
 
@@ -6,13 +6,13 @@
 
 #IncludeRegexTransform: 
 
-/home/alivasples/PROJECTS/External/RC-DataGenerator/Alexis Code (DG for Relational Conditioner)/include/simple_file_parser/simple_file_parser.cc
+/home/alivasples/Documentos/PROJECTS/External/RC-DataGenerator/André/include/simple_file_parser/simple_file_parser.cc
 iostream
 -
 simple_file_parser.h
-/home/alivasples/PROJECTS/External/RC-DataGenerator/Alexis Code (DG for Relational Conditioner)/include/simple_file_parser/simple_file_parser.h
+/home/alivasples/Documentos/PROJECTS/External/RC-DataGenerator/André/include/simple_file_parser/simple_file_parser.h
 
-/home/alivasples/PROJECTS/External/RC-DataGenerator/Alexis Code (DG for Relational Conditioner)/include/simple_file_parser/simple_file_parser.h
+/home/alivasples/Documentos/PROJECTS/External/RC-DataGenerator/André/include/simple_file_parser/simple_file_parser.h
 vector
 -
 string
@@ -22,7 +22,7 @@ fstream
 cstdlib
 -
 
-/home/alivasples/PROJECTS/External/RC-DataGenerator/Alexis Code (DG for Relational Conditioner)/main.cpp
+/home/alivasples/Documentos/PROJECTS/External/RC-DataGenerator/André/main.cpp
 iostream
 -
 iterator
@@ -44,45 +44,45 @@ set
 iomanip
 -
 src/Attribute.h
-/home/alivasples/PROJECTS/External/RC-DataGenerator/Alexis Code (DG for Relational Conditioner)/src/Attribute.h
+/home/alivasples/Documentos/PROJECTS/External/RC-DataGenerator/André/src/Attribute.h
 src/Row.h
-/home/alivasples/PROJECTS/External/RC-DataGenerator/Alexis Code (DG for Relational Conditioner)/src/Row.h
+/home/alivasples/Documentos/PROJECTS/External/RC-DataGenerator/André/src/Row.h
 include/simple_file_parser/simple_file_parser.h
-/home/alivasples/PROJECTS/External/RC-DataGenerator/Alexis Code (DG for Relational Conditioner)/include/simple_file_parser/simple_file_parser.h
+/home/alivasples/Documentos/PROJECTS/External/RC-DataGenerator/André/include/simple_file_parser/simple_file_parser.h
 src/Utils.h
-/home/alivasples/PROJECTS/External/RC-DataGenerator/Alexis Code (DG for Relational Conditioner)/src/Utils.h
+/home/alivasples/Documentos/PROJECTS/External/RC-DataGenerator/André/src/Utils.h
 queue
 -
 
-/home/alivasples/PROJECTS/External/RC-DataGenerator/Alexis Code (DG for Relational Conditioner)/src/Attribute.cpp
+/home/alivasples/Documentos/PROJECTS/External/RC-DataGenerator/André/src/Attribute.cpp
 Attribute.h
-/home/alivasples/PROJECTS/External/RC-DataGenerator/Alexis Code (DG for Relational Conditioner)/src/Attribute.h
+/home/alivasples/Documentos/PROJECTS/External/RC-DataGenerator/André/src/Attribute.h
 iostream
 -
 
-/home/alivasples/PROJECTS/External/RC-DataGenerator/Alexis Code (DG for Relational Conditioner)/src/Attribute.h
+/home/alivasples/Documentos/PROJECTS/External/RC-DataGenerator/André/src/Attribute.h
 map
 -
 vector
 -
 
-/home/alivasples/PROJECTS/External/RC-DataGenerator/Alexis Code (DG for Relational Conditioner)/src/Row.cpp
+/home/alivasples/Documentos/PROJECTS/External/RC-DataGenerator/André/src/Row.cpp
 Row.h
-/home/alivasples/PROJECTS/External/RC-DataGenerator/Alexis Code (DG for Relational Conditioner)/src/Row.h
+/home/alivasples/Documentos/PROJECTS/External/RC-DataGenerator/André/src/Row.h
 
-/home/alivasples/PROJECTS/External/RC-DataGenerator/Alexis Code (DG for Relational Conditioner)/src/Row.h
+/home/alivasples/Documentos/PROJECTS/External/RC-DataGenerator/André/src/Row.h
 vector
 -
 string
 -
 Attribute.h
-/home/alivasples/PROJECTS/External/RC-DataGenerator/Alexis Code (DG for Relational Conditioner)/src/Attribute.h
+/home/alivasples/Documentos/PROJECTS/External/RC-DataGenerator/André/src/Attribute.h
 
-/home/alivasples/PROJECTS/External/RC-DataGenerator/Alexis Code (DG for Relational Conditioner)/src/Utils.cpp
+/home/alivasples/Documentos/PROJECTS/External/RC-DataGenerator/André/src/Utils.cpp
 Utils.h
-/home/alivasples/PROJECTS/External/RC-DataGenerator/Alexis Code (DG for Relational Conditioner)/src/Utils.h
+/home/alivasples/Documentos/PROJECTS/External/RC-DataGenerator/André/src/Utils.h
 
-/home/alivasples/PROJECTS/External/RC-DataGenerator/Alexis Code (DG for Relational Conditioner)/src/Utils.h
+/home/alivasples/Documentos/PROJECTS/External/RC-DataGenerator/André/src/Utils.h
 vector
 -
 math.h
